@@ -7,8 +7,9 @@ const App = () => {
   const [list1, setList1] = useState([]);
   const [dropdown1, setDropdown1] = useState("https://vnexpress.net");
   const [dropdown2, setDropdown2] = useState("10");
+  const [dropdown3, setDropdown3] = useState("1");
   const fetchListData = async () => {
-    const apiUrl = `${process.env.REACT_APP_API_URL}/ranking?url=${dropdown1}&limit=${dropdown2}`;
+    const apiUrl = `${process.env.REACT_APP_API_URL}/ranking?url=${dropdown1}&limit=${dropdown2}&dateRange=${dropdown3}`;
     
     // Simulate an API call
     const response = await fetch(apiUrl);
@@ -67,6 +68,21 @@ const App = () => {
           <option value="">Select Option</option>
           <option value="10">10 items</option>
           <option value="20">20 items</option>
+        </select>
+
+        <select
+          value={dropdown3}
+          onChange={(e) => setDropdown3(e.target.value)}
+          style={{
+            padding: "10px",
+            margin: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+          }}
+        >
+          <option value="">Select Option</option>
+          <option value="1">Today</option>
+          <option value="7">Last 7 days</option>
         </select>
 
         {isLoading && <p><img src="/circles.svg" onerror="this.src='your.png'"/></p>}
