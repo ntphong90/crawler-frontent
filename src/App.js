@@ -71,44 +71,22 @@ const App = () => {
 
         {isLoading && <p><img src="/circles.svg" onerror="this.src='your.png'"/></p>}
         {(
-          <ul style={{ listStyleType: "none", padding: 0 }}>
+           <div class="row margin-md">
             {list1.map((item, index) => (
-              <li
-              key={index}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "10px",
-                marginBottom: "8px",
-                backgroundColor: "#f8f9fa",
-                borderRadius: "5px",
-                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  textDecoration: "none",
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                <strong>{item.title}</strong>
-              </a>
-              <span style={{
-                textDecoration: "none",
-                color: "black",
-                fontWeight: "bold",
-              }}>{item.vote} Votes</span>
-            </li>
+            <div class="card col-lg-4 col-md-12" key={index}>
+            <img class="card-img-top" src={item.image} alt="Card image cap"/>
+            <div class="card-body">
+              <h5 class="card-title">{item.title}</h5>
+              <a class="card-text" href={item.url}  target="_blank">{item.url}</a>
+              <p class="card-text"><small class="text-muted">{item.vote} votes</small></p>
+            </div>
+          </div>
             ))}
-          </ul>
+          </div>
+
         )}
-      </div>
-    </div>
+        </div>
+</div>
   );
 };
 
