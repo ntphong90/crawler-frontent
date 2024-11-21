@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import reportWebVitals from './reportWebVitals';
 
 const App = () => {
   // States for managing loaders
@@ -85,16 +86,16 @@ const App = () => {
           <option value="7">Last 7 days</option>
         </select>
 
-        {isLoading && <p><img src="/circles.svg" onerror="this.src='your.png'"/></p>}
+        {isLoading && <p><img src="/circles.svg"/></p>}
         {(
-           <div class="row margin-md">
+           <div className="row margin-md">
             {list1.map((item, index) => (
-            <div class="card col-lg-4 col-md-12" key={index}>
-            <img class="card-img-top" src={item.image} alt="Card image cap"/>
-            <div class="card-body">
-              <h5 class="card-title">{item.title}</h5>
-              <a class="card-text" href={item.url}  target="_blank">{item.url}</a>
-              <p class="card-text"><small class="text-muted">{item.vote} votes</small></p>
+            <div className="card col-lg-4 col-md-12" key={index}>
+            <img className="card-img-top" src={item.image} alt="Card image cap"/>
+            <div className="card-body">
+              <h5 className="card-title">{item.title}</h5>
+              <a className="card-text" href={item.url}  target="_blank">{item.url}</a>
+              <p className="card-text"><small className="text-muted">{item.vote} votes</small></p>
             </div>
           </div>
             ))}
@@ -105,6 +106,19 @@ const App = () => {
 </div>
   );
 };
-
+reportWebVitals((metric) => {
+  console.log(metric); // Log each Web Vital metric, including LCP and INP
+  fetch(`${process.env.REACT_APP_API_URL}/webvital`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: metric.name,
+      value: metric.value,
+      delta: metric.delta,
+      id: metric.id,
+      timestamp: new Date().toISOString(),
+    }),
+  }).catch((err) => console.error('Failed to send metric', err));
+});
 export default App;
 
