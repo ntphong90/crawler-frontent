@@ -3,6 +3,9 @@ const reportWebVitals = (onPerfEntry) => {
     import('web-vitals').then(({ onCLS, onFCP, onINP, onLCP, onTTFB }) => {
       onINP(onPerfEntry); // Use onINP instead of getINP
       onFCP(onPerfEntry);
+      onLCP(onPerfEntry);
+      onCLS(onPerfEntry);
+      onTTFB(onPerfEntry);
     });
   }
 };
